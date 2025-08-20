@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Image Gallery</title>
+    <meta name="description" content="A premium, responsive image gallery with advanced filtering and lightbox features">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="nav__brand">
+                <h1 class="nav__title">Premium Gallery</h1>
+            </div>
+            
+            <div class="nav__controls">
+                <button class="theme-toggle" aria-label="Toggle dark/light theme" type="button">
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Category Filter Bar -->
+    <div class="filter-bar" role="region" aria-label="Gallery filters">
+        <div class="filter-bar__container">
+            <div class="filter-tabs" role="tablist" aria-label="Image categories">
+                <button class="filter-tab filter-tab--active" role="tab" aria-selected="true" data-category="all">
+                    All
+                </button>
+                <button class="filter-tab" role="tab" aria-selected="false" data-category="sneakers">
+                    Sneakers
+                </button>
+                <button class="filter-tab" role="tab" aria-selected="false" data-category="street">
+                    Street
+                </button>
+                <button class="filter-tab" role="tab" aria-selected="false" data-category="portraits">
+                    Portraits
+                </button>
+                <button class="filter-tab" role="tab" aria-selected="false" data-category="nature">
+                    Nature
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <label for="search-input" class="search-label">Search images:</label>
+                <input 
+                    type="search" 
+                    id="search-input" 
+                    class="search-input" 
+                    placeholder="Search by caption or description..."
+                    aria-describedby="search-results"
+                >
+                <div id="search-results" class="search-results" aria-live="polite"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Gallery Content -->
+    <main class="main" role="main">
+        <div class="gallery-container">
+            <div class="gallery-grid" id="gallery-grid" role="region" aria-label="Image gallery">
+                <!-- Gallery items will be dynamically inserted here -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" role="navigation" aria-label="Gallery pagination">
+                <button class="pagination__btn pagination__btn--prev" aria-label="Previous page" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                    Previous
+                </button>
+                
+                <div class="pagination__pages" role="group" aria-label="Page numbers">
+                    <!-- Page numbers will be dynamically inserted here -->
+                </div>
+                
+                <button class="pagination__btn pagination__btn--next" aria-label="Next page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                    Next
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+        <div class="lightbox__backdrop"></div>
+        
+        <div class="lightbox__content">
+            <div class="lightbox__header">
+                <div class="lightbox__info">
+                    <span class="lightbox__counter" id="lightbox-counter">1 / 24</span>
+                    <h2 class="lightbox__caption" id="lightbox-caption">Image caption</h2>
+                    <p class="lightbox__credit" id="lightbox-credit">Photographer Name</p>
+                </div>
+                
+                <div class="lightbox__actions">
+                    <button class="lightbox__btn lightbox__btn--download" aria-label="Download image">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </button>
+                    
+                    <button class="lightbox__btn lightbox__btn--share" aria-label="Share image">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                    </button>
+                    
+                    <button class="lightbox__btn lightbox__btn--close" aria-label="Close lightbox">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="lightbox__image-container">
+                <img class="lightbox__image" id="lightbox-image" alt="" loading="eager">
+                
+                <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous image">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                
+                <button class="lightbox__nav lightbox__nav--next" aria-label="Next image">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="lightbox__footer">
+                <button class="lightbox__btn lightbox__btn--slideshow" aria-label="Toggle slideshow">
+                    <svg class="slideshow-icon slideshow-icon--play" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5,3 19,12 5,21"></polygon>
+                    </svg>
+                    <svg class="slideshow-icon slideshow-icon--pause" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="6" y="4" width="4" height="16"></rect>
+                        <rect x="14" y="4" width="4" height="16"></rect>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading" id="loading" aria-hidden="true">
+        <div class="loading__spinner"></div>
+        <p class="loading__text">Loading gallery...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
